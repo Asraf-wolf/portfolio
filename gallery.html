@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: #0d0d0d;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    #cosmic-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      z-index: 10;
+      transition: transform 0.4s ease;
+      box-shadow: 0 0 20px #00f7ff60;
+    }
+
+    .sidebar.closed {
+      transform: translateX(-100%);
+    }
+
+    .sidebar h1 {
+      color: #00f7ff;
+      margin-bottom: 30px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar nav ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .sidebar nav ul li a:hover {
+      color: #ff2ddf;
+    }
+
+    .references-toggle {
+      margin-top: 30px;
+      text-align: center;
+      cursor: pointer;
+      color: #00f7ff;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .references-toggle:hover {
+      color: #ff2ddf;
+    }
+
+    .references-list {
+      margin-top: 15px;
+      display: none;
+      list-style: none;
+      padding-left: 10px;
+    }
+
+    .references-list li {
+      margin: 8px 0;
+    }
+
+    .references-list li a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .references-list li a:hover {
+      color: #00f7ff;
+      text-shadow: 0 0 5px #00f7ff;
+    }
+
+    .close-sidebar {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #ff2ddf;
+    }
+
+    .open-sidebar-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 26px;
+      z-index: 9;
+      cursor: pointer;
+      color: #00f7ff;
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .gallery-section {
+      margin-left: 250px;
+      padding: 80px 40px;
+      position: relative;
+      z-index: 1;
+      transition: margin-left 0.4s ease;
+    }
+
+    .sidebar.closed + .gallery-section {
+      margin-left: 0;
+    }
+
+    .gallery-section h2 {
+      font-size: 40px;
+      color: #00f7ff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .filter-buttons button {
+      background: linear-gradient(135deg, #00f7ff, #ff2ddf);
+      color: #0d0d0d;
+      border: none;
+      padding: 12px 25px;
+      margin: 5px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: 'Orbitron';
+      box-shadow: 0 0 10px #00f7ff80;
+      transition: all 0.3s ease;
+    }
+
+    .filter-buttons button:hover,
+    .filter-buttons button.active {
+      box-shadow: 0 0 20px #ff2ddf, 0 0 30px #00f7ff;
+      transform: scale(1.05);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 15px #00f7ff40;
+      cursor: pointer;
+      transition: transform 0.4s;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 20px 20px 0 0;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .card-content {
+      padding: 15px 20px;
+    }
+
+    .card-content h4 {
+      margin: 0;
+      font-size: 18px;
+      color: #00f7ff;
+    }
+
+    .card-content p {
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 5px;
+    }
+
+    .card-keyword {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      padding: 4px 10px;
+      background: #ff2ddf;
+      border-radius: 15px;
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #00f7ff;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .open-sidebar-btn {
+        display: block;
+      }
+      .gallery-section {
+        padding: 100px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+-- Sidebar Toggle Button -->
+  <button id="sidebarToggle" class="sidebar-toggle-btn">☰</button>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <br>
+    <h1 class="sidebar-title">Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="biodata.html"><i class="fas fa-id-card"></i> Biodata</a></li>
+        <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+        <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+        <li><a href="family.html"><i class="fas fa-users"></i> Family</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="reference.html"><i class="fas fa-images"></i> reference</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="toggle-theme">
+      <i class="fas fa-moon"></i> Toggle Theme
+    </div>
+
+<!-- Particles -->
+<div id="cosmic-particles"></div>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <h2>My Gallery</h2>
+  <div class="filter-buttons">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="me">Me</button>
+    <button data-filter="design">Design</button>
+    <button data-filter="skills">Skills</button>
+    <button data-filter="edit">Edit</button>
+  </div>
+
+  <div class="gallery-grid">
+   <!-- Me -->
+    <div class="gallery-item" data-category="me">
+      <img src="images/me_1.jpeg" alt="Me 1">
+      <div class="card-content">
+        <h4>Portrait Mode</h4>
+        <p>Just me being me.</p>
+        <span class="card-keyword">#Self</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="me">
+      <img src="images/me_2.jpeg" alt="Me 2">
+      <div class="card-content">
+        <h4>Abey fesi</h4>
+        <p>Work the program.</p>
+        <span class="card-keyword">#MCVibes</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="me">
+      <img src="images/miss.jpeg" alt="Me 3">
+      <div class="card-content">
+        <h4>Student Mood</h4>
+        <p>Snapshot from the setup.</p>
+        <span class="card-keyword">#studentMood</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="me">
+      <img src="images/me_4.jpeg" alt="Me 3">
+      <div class="card-content">
+        <h4>kacip Mood</h4>
+        <p>sleppy prince.</p>
+        <span class="card-keyword">#kacipMood</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="me">
+      <img src="images/me_5.jpeg" alt="Me 3">
+      <div class="card-content">
+        <h4>golden memory</h4>
+        <p>with my friend.</p>
+        <span class="card-keyword">#withfriend</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="me">
+      <img src="images/me_6.jpeg" alt="Me 3">
+      <div class="card-content">
+        <h4>love this</h4>
+        <p>say chees.</p>
+        <span class="card-keyword">#happy</span>
+      </div>
+    </div>
+
+    <!-- Design -->
+    <div class="gallery-item" data-category="design">
+      <img src="images/design_1.jpeg" alt="Design 1">
+      <div class="card-content">
+        <h4>Poster Art</h4>
+        <p>Futuristic theme poster.</p>
+        <span class="card-keyword">#Graphics</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="design">
+      <img src="images/design_2.gif" alt="Design 2">
+      <div class="card-content">
+        <h4>Typography Animation</h4>
+        <p>Tumbnail.</p>
+        <span class="card-keyword">#Typography</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="design">
+      <img src="images/design_3.gif" alt="Design 3">
+      <div class="card-content">
+        <h4>Animation Motion</h4>
+        <p>Animation.</p>
+        <span class="card-keyword">#motionmoving</span>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="gallery-item" data-category="skills">
+      <img src="images/skill_1.gif" alt="Skills 1">
+      <div class="card-content">
+        <h4>Public Speaking </h4>
+        <p>content host.</p>
+        <span class="card-keyword">#speaking</span>
+        <span class="card-keyword">#blooper</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="skills">
+      <img src="images/skill_2.png" alt="Skills 2">
+      <div class="card-content">
+        <h4>3D design</h4>
+        <p>Motion graphics 3D animation.</p>
+        <span class="card-keyword">#3Ddesign</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="skills">
+      <img src="images/skill_3.jpg" alt="Skills 3">
+      <div class="card-content">
+        <h4>Figma</h4>
+        <p>Create Website.</p>
+        <span class="card-keyword">#figma</span>
+      </div>
+    </div>
+
+    <!-- Edit -->
+    <div class="gallery-item" data-category="edit">
+      <img src="images/edit_1.jpg" alt="Edit 1">
+      <div class="card-content">
+        <h4>Color Grading</h4>
+        <p>Before vs After tones.</p>
+        <span class="card-keyword">#Edit</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="edit">
+      <img src="images/edit_2.webp" alt="Edit 2">
+      <div class="card-content">
+        <h4>Face Retouch</h4>
+        <p>Skin tone correction.</p>
+        <span class="card-keyword">#Photoshop</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="edit">
+      <img src="images/edit_3.gif" alt="Edit 3">
+      <div class="card-content">
+        <h4>Neon Effect</h4>
+        <p>Added glow strokes.</p>
+        <span class="card-keyword">#Neon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="imageModal">
+  <span class="modal-close" onclick="closeModal()">×</span>
+  <img id="modalImage" src="" alt="Expanded Image">
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  // Particles
+  particlesJS("cosmic-particles", {
+    particles: {
+      number: { value: 90, density: { enable: true, value_area: 800 } },
+      color: { value: ["#00f7ff", "#ffffff", "#ff2ddf"] },
+      shape: { type: "circle" },
+      opacity: {
+        value: 0.8,
+        random: true,
+        anim: { enable: true, speed: 1, opacity_min: 0.3, sync: false }
+      },
+      size: {
+        value: 2.5,
+        random: true,
+        anim: { enable: true, speed: 3, size_min: 1, sync: false }
+      },
+      line_linked: {
+        enable: true,
+        distance: 130,
+        color: "#ffffff",
+        opacity: 0.1,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 0.7,
+        direction: "none",
+        random: true,
+        out_mode: "out"
+      }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "grab" },
+        onclick: { enable: true, mode: "repulse" },
+        resize: true
+      },
+      modes: {
+        grab: { distance: 150, line_linked: { opacity: 0.4 } },
+        repulse: { distance: 100, duration: 0.4 }
+      }
+    },
+    retina_detect: true
+  });
+
+  // Modal Image Viewer
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  document.querySelectorAll(".gallery-item img").forEach(img => {
+    img.addEventListener("click", () => {
+      modal.style.display = "flex";
+      modalImg.src = img.src;
+    });
+  });
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  // Filter Buttons
+  const filterButtons = document.querySelectorAll(".filter-buttons button");
+  const galleryItems = document.querySelectorAll(".gallery-item");
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.getAttribute("data-filter");
+      galleryItems.forEach(item => {
+        item.style.display = (filter === "all" || item.dataset.category === filter) ? "block" : "none";
+      });
+    });
+  });
+
+  // Sidebar Toggle
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("closed");
+  }
+</script>
+
+</body>
+</html>

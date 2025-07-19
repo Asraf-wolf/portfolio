@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="biodata.html"><i class="fas fa-id-card"></i> Biodata</a></li>
+        <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+        <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+        <li><a href="family.html"><i class="fas fa-users"></i> Family</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="reference.html"><i class="fas fa-images"></i> reference</a></li>
+      </ul>
+    </nav>
+    <div class="toggle-theme" onclick="toggleTheme()">Toggle Theme</div>
+  </div>
+
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
+  <!-- Experience Section -->
+  <section class="experience-section">
+    <h2>Experience</h2>
+    <div class="experience-grid">
+      <div class="exp-card">
+        <h3>Swiss Garden Hotel </h3>
+        <h4>Part-Time Job</h4>
+        <h4>lobby ambassador </h4>
+        <div class="date">2023</div>
+        <p>Working with the wider development team<br>
+Manage website design<br> content<br> and SEO Marketing, Branding and Logo Design </p>
+      </div>
+      <div class="exp-card">
+        <h3>Food Grab</h3>
+        <h4>Part-Time Job</h4>
+        <h4>food delivery</h4>
+        <div class="date">2023-2025</div>
+        <p>Assisted with the deliver food to customer.</p>
+      </div>
+      <div class="exp-card">
+        <h3>Pejabat Agama Jajahan Pasir Puteh</h3>
+        <h4>INTERNSHIP</h4>
+        <h4>Reseption and assistant superintendent</h4>
+        <div class="date">2025</div>
+        <p>Monitoring FInancial Flow<br> 
+          Manage Customer Services <br>
+          Manage  System Record </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Particle Script -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+  particlesJS('particles-js', {
+    particles: {
+      number: {
+        value: 80,
+        density: {
+          enable: true,
+          value_area: 800
+        }
+      },
+      color: { value: "#00f7ff" },
+      shape: {
+        type: "circle",
+        stroke: { width: 0, color: "#000000" }
+      },
+      opacity: {
+        value: 0.6,
+        random: false,
+        anim: {
+          enable: false
+        }
+      },
+      size: {
+        value: 4,
+        random: true,
+        anim: {
+          enable: false
+        }
+      },
+      line_linked: {
+        enable: true,
+        distance: 130,
+        color: "#00f7ff",
+        opacity: 0.4,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 1.2,
+        direction: "none",
+        random: false,
+        straight: false,
+        out_mode: "out",
+        bounce: false
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: { enable: true, mode: "grab" },
+        onclick: { enable: true, mode: "push" },
+        resize: true
+      },
+      modes: {
+        grab: {
+          distance: 140,
+          line_linked: { opacity: 0.6 }
+        },
+        push: {
+          particles_nb: 4
+        }
+      }
+    },
+    retina_detect: true
+  });
+</script>
+
+</body>
+</html>

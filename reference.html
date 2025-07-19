@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>References</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: #0d0d0d;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    #cosmic-particles {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 250px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      z-index: 10;
+      box-shadow: 0 0 20px #00f7ff60;
+    }
+
+    .sidebar h1 {
+      color: #00f7ff;
+      margin-bottom: 30px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar nav ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .sidebar nav ul li a:hover {
+      color: #ff2ddf;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 80px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-content h2 {
+      font-size: 40px;
+      color: #00f7ff;
+      margin-bottom: 30px;
+    }
+
+    .reference-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 15px #00f7ff40;
+    }
+
+    .reference-card h3 {
+      color: #ff2ddf;
+      margin-bottom: 10px;
+    }
+
+    .reference-card a {
+      color: #00f7ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .reference-card a:hover {
+      text-shadow: 0 0 8px #00f7ff;
+    }
+
+    .reference-card p {
+      color: #ccc;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <h1>Portfolio</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="biodata.html"><i class="fas fa-id-card"></i> Biodata</a></li>
+        <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+        <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+        <li><a href="family.html"><i class="fas fa-users"></i> Family</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="refenrence.html"><i class="fas fa-images"></i> reference</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- Background particles -->
+<div id="cosmic-particles"></div>
+
+<!-- Main content -->
+<div class="main-content">
+  <h2>Useful References</h2>
+
+  <div class="reference-card">
+    <h3>Behance</h3>
+    <a href="https://www.behance.net/" target="_blank">https://www.behance.net/</a>
+    <p>Source of creative inspiration, portfolios, and design ideas.</p>
+  </div>
+
+  <div class="reference-card">
+    <h3>Dribbble</h3>
+    <a href="https://dribbble.com/" target="_blank">https://dribbble.com/</a>
+    <p>Showcase and discover creative work by designers worldwide.</p>
+  </div>
+
+  <div class="reference-card">
+    <h3>Google Fonts</h3>
+    <a href="https://fonts.google.com/" target="_blank">https://fonts.google.com/</a>
+    <p>Free and beautiful web fonts for your websites.</p>
+  </div>
+
+  <div class="reference-card">
+    <h3>Unsplash</h3>
+    <a href="https://unsplash.com/" target="_blank">https://unsplash.com/</a>
+    <p>High-quality free images for personal and commercial use.</p>
+  </div>
+</div>
+
+<!-- Particles.js -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("cosmic-particles", {
+    particles: {
+      number: { value: 80, density: { enable: true, value_area: 800 } },
+      color: { value: ["#00f7ff", "#ffffff", "#ff2ddf"] },
+      shape: { type: "circle" },
+      opacity: { value: 0.6, random: true },
+      size: { value: 3, random: true },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#ffffff",
+        opacity: 0.1,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 1,
+        random: true,
+        direction: "none",
+        out_mode: "out"
+      }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "grab" },
+        onclick: { enable: true, mode: "repulse" },
+        resize: true
+      },
+      modes: {
+        grab: { distance: 140, line_linked: { opacity: 0.3 } },
+        repulse: { distance: 100, duration: 0.4 }
+      }
+    },
+    retina_detect: true
+  });
+</script>
+
+</body>
+</html>

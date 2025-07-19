@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Futurist Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
+</head>
+<body>
+
+  <!-- Sidebar Toggle Button -->
+  <button id="sidebarToggle" class="sidebar-toggle-btn">☰</button>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <br>
+    <h1 class="sidebar-title">Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="biodata.html"><i class="fas fa-id-card"></i> Biodata</a></li>
+        <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+        <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+        <li><a href="family.html"><i class="fas fa-users"></i> Family</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="reference.html"><i class="fas fa-images"></i> reference</a></li>
+      </ul>
+    </nav>
+    <div class="toggle-theme">
+      <i class="fas fa-moon"></i> Toggle Theme
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="home" class="home-section">
+    <div id="particles-js"></div>
+    <div class="content">
+      <h2 class="highlight">Hello, I'm Arif Asraf</h2>
+      <h3><span id="typed"></span></h3>
+      <p>Passionate about creating innovative digital experiences that blend creativity with functionality. I bring ideas to life through code and design.</p>
+      <div class="buttons">
+        <a href="gallery.html" class="btn primary">View My Work</a>
+        <a href="biodata.html" class="btn outline">Get In Touch</a>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    // Particle effect
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80 },
+        size: { value: 3 },
+        color: { value: "#00f7ff" },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00f7ff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2
+        }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+
+    // Typing effect
+    new Typed("#typed", {
+      strings: ["Creative Coder", "UI/UX Enthusiast", "Front-End Developer"],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 1500,
+      loop: true
+    });
+
+    // Theme toggle
+    document.querySelector('.toggle-theme').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    // Sidebar toggle logic
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const home = document.getElementById('home');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      if (sidebar.classList.contains('collapsed')) {
+        toggleBtn.textContent = "☰";
+        home.style.marginLeft = "0";
+      } else {
+        toggleBtn.textContent = "✖";
+        home.style.marginLeft = "250px";
+      }
+    });
+  </script>
+</body>
+</html>

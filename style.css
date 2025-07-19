@@ -1,0 +1,556 @@
+/* === Global Styles === */
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: #0d0d1a;
+  color: #fff;
+  overflow-x: hidden;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* === Sidebar Navigation === */
+.sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(to bottom, #0b0c1a, #14182e);
+  color: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 20px rgba(0, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.sidebar h1 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav ul li {
+  margin: 20px 0;
+}
+
+.sidebar nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+  display: block;
+  padding-left: 10px;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  color: #00f7ff;
+}
+
+.toggle-theme {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === Main Home Section === */
+.home-section {
+  margin-left: 250px;
+  padding: 60px;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.content {
+  z-index: 1;
+  max-width: 800px;
+}
+
+h2 {
+  font-size: 60px;
+  background: linear-gradient(to right, #00f7ff, #ff2ddf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+h3 {
+  font-size: 30px;
+  margin: 10px 0 20px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+/* === Section Template (Education, Biodata, etc.) === */
+.section {
+  margin-left: 250px;
+  padding: 80px 60px;
+  background: #0d0d1a;
+  min-height: 100vh;
+  border-top: 1px solid #1f1f2f;
+}
+
+.section h2 {
+  font-size: 40px;
+  color: #00f7ff;
+  margin-bottom: 20px;
+}
+
+.section .card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 247, 255, 0.1);
+  margin-top: 20px;
+  color: #fff;
+}
+
+/* === Experience Section (Custom Layout) === */
+.experience-section {
+  margin-left: 250px;
+  padding: 80px 60px;
+  min-height: 100vh;
+  background: #0d0d1a;
+  color: #fff;
+}
+
+.experience-section h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #00f7ff;
+}
+
+.experience-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.exp-card {
+  background: rgba(0, 255, 255, 0.06);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px;
+  color: #fff;
+  width: 300px;
+  box-shadow: 0 0 25px rgba(0, 247, 255, 0.15);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.exp-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 247, 255, 0.2) 0%, transparent 70%);
+  animation: rotate-glow 10s linear infinite;
+  z-index: 0;
+}
+
+.exp-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+}
+
+.exp-card h3,
+.exp-card h4,
+.exp-card p,
+.exp-card .date {
+  position: relative;
+  z-index: 1;
+}
+
+.exp-card h3 {
+  font-size: 24px;
+  color: #00f7ff;
+}
+
+.exp-card h4 {
+  font-size: 18px;
+  color: #ccc;
+  margin: 10px 0;
+}
+
+.exp-card .date {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.exp-card p {
+  font-size: 15px;
+  color: #ccc;
+}
+
+/* === Timeline Styles (for Education) === */
+.timeline {
+  position: relative;
+  margin: 40px 0;
+  padding-left: 40px;
+  border-left: 2px solid #00f7ff;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 20px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -11px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  background: #00f7ff;
+  border: 3px solid #0d0d1a;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00f7ff;
+}
+
+.timeline-content {
+  background: rgba(0, 247, 255, 0.07);
+  border: 1px solid #00f7ff55;
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  padding: 20px;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #00f7ff55;
+}
+
+/* === Biodata Cards === */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(0, 247, 255, 0.2);
+  max-width: 600px;
+  margin: auto;
+}
+
+.neon-card h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
+  background: linear-gradient(to right, #00f7ff, #ff2ddf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.biodata-list {
+  list-style: none;
+  padding: 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+.biodata-list li {
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+/* === Buttons === */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, #00f7ff, #a84dfc);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+}
+
+.btn.primary:hover {
+  transform: scale(1.05);
+}
+
+.btn.outline {
+  border: 2px solid #00f7ff;
+  color: #00f7ff;
+  background: transparent;
+}
+
+.btn.outline:hover {
+  background: #00f7ff;
+  color: #000;
+}
+
+/* === Social Icons === */
+.social-icons {
+  margin-top: 30px;
+}
+
+.social-icons a {
+  color: #00f7ff;
+  font-size: 24px;
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+}
+
+/* === Animation === */
+@keyframes rotate-glow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* === Light Mode === */
+body.light {
+  background: #f5faff;
+  color: #000;
+}
+
+body.light .sidebar {
+  background: #fff;
+  color: #000;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.light .sidebar a {
+  color: #000;
+}
+
+body.light .btn.outline {
+  border-color: #000;
+  color: #000;
+}
+
+body.light .btn.outline:hover {
+  background: #000;
+  color: #fff;
+}
+
+body.light .section,
+body.light .experience-section {
+  background: #fefefe;
+  color: #000;
+}
+
+body.light .section .card,
+body.light .timeline-content,
+body.light .exp-card {
+  background: rgba(0, 0, 0, 0.03);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  border: 2px solid #00f7ff55;
+  box-shadow: 0 0 15px rgba(0, 247, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 247, 255, 0.4);
+}
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 40px auto 0;
+}
+
+.photo-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 247, 255, 0.15);
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.photo-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 45, 223, 0.4);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.photo-card:hover img {
+  transform: scale(1.1);
+}
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #00f7ff;
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 8px;
+  z-index: 1100;
+  cursor: pointer;
+  /* REMOVE THIS ↓↓↓ */
+  /* display: none; */
+}
+
+.sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+.sidebar {
+  transition: transform 0.3s ease;
+}
+.navbar {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: #111; /* or your own background */
+  position: relative;
+  z-index: 10;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* gap between menu and text */
+}
+
+.menu-icon {
+  background: #00ffff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+}
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: #0f0f0f;
+  color: white;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00f7ff;
+  text-shadow: 0 0 10px #00f7ff;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00f7ff;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px #00f7ff;
+}
+
+.biodata-list {
+  list-style: none;
+  padding: 0;
+  font-size: 1.1rem;
+  line-height: 2rem;
+}
+
+.biodata-list li strong {
+  color: #00f7ff;
+}
+
+/* Dark theme mode toggle */
+body.dark {
+  background-color: #111;
+  color: #ccc;
+}

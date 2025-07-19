@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Family</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      background-color: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    #cosmic-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 30px 20px;
+      box-shadow: 2px 0 10px rgba(0, 247, 255, 0.2);
+      z-index: 10;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-100%);
+    }
+
+    .sidebar h1 {
+      color: #00f7ff;
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar nav ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+
+    .sidebar nav ul li a:hover {
+      color: #00f7ff;
+    }
+
+    .toggle-theme {
+      margin-top: 40px;
+      text-align: center;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .toggle-sidebar-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #00f7ff;
+      color: #000;
+      border: none;
+      padding: 10px 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 11;
+      box-shadow: 0 0 10px #00f7ff;
+    }
+
+    .family-section {
+      margin-left: 250px;
+      padding: 80px 60px;
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      color: #fff;
+      transition: margin-left 0.3s ease;
+    }
+
+    .sidebar.collapsed + .family-section {
+      margin-left: 0;
+    }
+
+    .family-section h2 {
+      font-size: 40px;
+      color: #00f7ff;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .family-group-title {
+      font-size: 24px;
+      color: #c3faff;
+      margin: 40px 0 20px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sibling-grid, .parent-grid, .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .sibling-card, .parent-card, .photo-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 30px rgba(0, 247, 255, 0.15);
+      transition: 0.3s ease;
+      text-align: center;
+    }
+
+    .sibling-card:hover, .parent-card:hover, .photo-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(255, 45, 223, 0.3);
+    }
+
+    .sibling-card h3, .parent-card h3 {
+      font-size: 24px;
+      color: #ff2ddf;
+      margin-bottom: 10px;
+    }
+
+    .sibling-card p, .parent-card p {
+      font-size: 16px;
+      color: #c3faff;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Toggle Button -->
+  <button class="toggle-sidebar-btn" onclick="toggleSidebar()">☰</button>
+
+  <!-- Sidebar -->
+  <br>
+  <div class="sidebar" id="sidebar">
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="biodata.html"><i class="fas fa-id-card"></i> Biodata</a></li>
+        <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+        <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+        <li><a href="family.html"><i class="fas fa-users"></i> Family</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="reference.html"><i class="fas fa-images"></i> reference</a></li>
+      </ul>
+    </nav>
+    <div class="toggle-theme">Toggle Theme</div>
+  </div>
+
+  <!-- Particle Background -->
+  <div id="cosmic-particles"></div>
+
+  <!-- Family Section -->
+  <section class="family-section" id="main">
+    <h2>My Family</h2>
+
+    <div class="family-group-title">Parents</div>
+    <div class="parent-grid">
+      <div class="parent-card">
+        <h3>My Father</h3>
+        <h4>Muhamad bin Mohd Nor</h4>
+        <p>Wise, hardworking, and always supportive of our dreams.</p>
+      </div>
+      <div class="parent-card">
+        <h3>My Mother</h3>
+        <h4>Rohani binti Sulaiman</h4>
+        <p>Loving, creative, and the heart of our family.</p>
+      </div>
+    </div>
+
+    <div class="family-group-title">Siblings</div>
+    <div class="sibling-grid">
+      <div class="sibling-card">
+        <h3>Sibling 1</h3>
+        <h4>Muhamad Asrul Hafiz bin Muhamad</h4>
+        <p>Older brother who loves photography (cat pic) .</p>
+      </div>
+      <div class="sibling-card">
+        <h3>Sibling 2</h3>
+        <h4>Muhammad Amirullah bin Muhamad</h4>
+        <p>big brother who loves fashion and is very loving.</p>
+      </div>
+      <div class="sibling-card">
+        <h3>Sibling 3</h3>
+        <h4>Muhamad Azinuddin bin Muhamad</h4>
+        <p>yonger brother who are very strong and determined.</p>
+      </div>
+      <div class="sibling-card">
+        <h3>Sibling 4</h3>
+        <h4>Nur Anis Nabilla binti Muhamad</h4>
+        <p>Older Sister Artist with a good at cooking .</p>
+      </div>
+      <div class="sibling-card">
+        <h3>Sibling 5</h3>
+        <h4>Nur Salsabila binti Muhamad</h4>
+        <p>Funny and energetic, always the life of the party.</p>
+      </div>
+      <div class="sibling-card">
+        <h3>Sibling 6</h3>
+        <h4>Nur Alea Ilyana binti Muhamad</h4>
+        <p>younger sister that alway give what i want .</p>
+      </div>
+      <div class="sibling-card">
+        <h3>Sibling 7</h3>
+        <h4>Muhamad Arif Asraf bin Muhamad</h4>
+        <p>The one, curious and full of questions.</p>
+      </div>
+      <div class="sibling-card">
+        <h3>Sibling 8</h3>
+        <h4>Muhamad Amirul Amin bin Muhamad</h4>
+        <p>The youngest one, who alway play video games.</p>
+      </div>
+    </div>
+
+    <div class="family-group-title">Family Photos</div>
+    <div class="photo-grid">
+      <div class="photo-card">
+        <img src="images/family_1.jpeg" alt="Family Photo 1" />
+      </div>
+      <div class="photo-card">
+        <img src="images/family_2.jpeg" alt="Family Photo 2" />
+      </div>
+      <div class="photo-card">
+        <img src="images/family_3.jpeg" alt="Family Photo 3" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Particle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
+    }
+
+    particlesJS("cosmic-particles", {
+      particles: {
+        number: { value: 100, density: { enable: true, value_area: 800 } },
+        color: { value: ["#ffffff", "#ff2ddf", "#00f7ff", "#ff00ff"] },
+        shape: { type: "circle" },
+        opacity: {
+          value: 0.8,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0.2,
+            sync: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.8,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.1,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out"
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "repulse" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 200, line_linked: { opacity: 0.4 } },
+          repulse: { distance: 100, duration: 0.4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+</body>
+</html>
